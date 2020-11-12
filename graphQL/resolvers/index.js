@@ -1,5 +1,7 @@
+const merchantResolver = require('./merchant')
+
 module.exports ={
     Query:{
-        hiWorld:()=>'Hello world'
+        ...merchantResolver.Query
     }
 }
