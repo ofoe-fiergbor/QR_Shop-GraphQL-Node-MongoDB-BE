@@ -3,6 +3,7 @@ const { model, Schema } = require("mongoose");
 const merchantSchema = new Schema({
   username: String,
   createdAt: String,
+  name: String,
   contact: String,
   address: String,
   products: [

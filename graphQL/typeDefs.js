@@ -5,6 +5,7 @@ module.exports = gql`
     id: ID!
     username: String!
     createdAt: String!
+    name:String!
     contact: String!
     address: String!
   }
@@ -29,5 +30,7 @@ module.exports = gql`
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
+    login(email:String! password:String!):User!
+    createMerchant(name:String! contact:String! address:String!): Merchant!
   }
 `;

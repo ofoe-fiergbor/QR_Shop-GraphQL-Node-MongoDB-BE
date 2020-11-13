@@ -6,6 +6,7 @@ module.exports ={
         ...merchantResolver.Query
     },
     Mutation:{
-        ...userResolver.Mutation
+        ...userResolver.Mutation,
+        ...merchantResolver.Mutation
     }
 }
