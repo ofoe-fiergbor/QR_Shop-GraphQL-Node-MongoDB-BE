@@ -87,5 +87,31 @@ module.exports = {
         throw new Error(error)
       }
     },
+
+    async likeMerchant(_, { merchantId }, context) {
+      const user = checkAuth(context);
+
+      const merchant = await Merchant.findById(merchantId);
+
+      if (merchant) {
+        if (merchant.likes.find((like) => like.email === user.email)) {
+          //merchant already liked so unlike merchant
+          merchant.likes = merchant.likes.filter(
+            (like) => like.email !== user.email
+          );
+        } else {
+          //not liked, like merchant
+          merchant.likes.push({
+            username: user.username,
+            email: user.email,
+            createdAt: new Date().toISOString(),
+          });
+        }
+        await merchant.save();
+        return merchant;
+      } else {
+        throw new UserInputError("Merchant not found");
+      }
+    },
   },
 };

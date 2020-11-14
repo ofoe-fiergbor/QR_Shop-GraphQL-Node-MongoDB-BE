@@ -23,27 +23,29 @@ module.exports = {
           createdAt: new Date().toISOString(),
         });
 
-        await merchant.save()
-        return merchant
-      }else throw UserInputError('Merchant not found')
+        await merchant.save();
+        return merchant;
+      } else throw UserInputError("Merchant not found");
     },
-    
-    deleteItem: async(_,{merchantId, itemId}, context )=>{
-        const user = checkAuth(context)
-        
-        const merchant = await Merchant.findById(merchantId)
 
-        if(merchant){
-            const itemIndex = merchant.items.findIndex(item=> item.id === itemId)
+    deleteItem: async (_, { merchantId, itemId }, context) => {
+      const user = checkAuth(context);
 
-            if(merchant.items[itemIndex].email === user.email){
-                merchant.items.splice(itemIndex, 1)
-                await merchant.save()
-                return merchant
-            }else throw new AuthenticationError('Access denied')
-        }else throw new Error('Merchant not found')
+      const merchant = await Merchant.findById(merchantId);
 
-    }
+      if (merchant) {
+        const itemIndex = merchant.items.findIndex(
+          (item) => item.id === itemId
+        );
+
+        if (merchant.items[itemIndex].email === user.email) {
+          merchant.items.splice(itemIndex, 1);
+          await merchant.save();
+          return merchant;
+        } else throw new AuthenticationError("Access denied");
+      } else throw new Error("Merchant not found");
+    },
+
+
   },
-
 };

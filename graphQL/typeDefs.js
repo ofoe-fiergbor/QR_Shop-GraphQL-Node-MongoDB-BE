@@ -5,18 +5,25 @@ module.exports = gql`
     id: ID!
     username: String!
     createdAt: String!
-    name:String!
+    name: String!
     email: String!
     address: String!
-    items:[Item]!
+    items: [Item]!
+    likes: [Like]!
   }
   type Item {
-    id:ID!
+    id: ID!
     username: String!
     email: String!
-    itemName:String!
-    price:Int!
-    createdAt:String!
+    itemName: String!
+    price: Int!
+    createdAt: String!
+  }
+  type Like {
+    id: ID!
+    username: String!
+    email: String!
+    createdAt: String!
   }
 
   input RegisterInput {
@@ -40,13 +47,15 @@ module.exports = gql`
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
-    login(email:String! password:String!):User!
+    login(email: String!, password: String!): User!
 
-    createMerchant(name:String! address:String!): Merchant!
-    deleteMerchant(merchantId:ID!): String!
-    updateMerchant(name:String! address:String! merchantId:ID!): Merchant!
+    createMerchant(name: String!, address: String!): Merchant!
+    deleteMerchant(merchantId: ID!): String!
+    updateMerchant(name: String!, address: String!, merchantId: ID!): Merchant!
+    likeMerchant(merchantId: ID!): Merchant!
 
-    createItem(itemName: String! price: Int! merchantId:ID!):Merchant!
-    deleteItem(itemId:ID! merchantId:ID!):Merchant!
+    createItem(itemName: String!, price: Int!, merchantId: ID!): Merchant!
+    deleteItem(itemId: ID!, merchantId: ID!): Merchant!
+    # updateItem(itemId: ID!, merchantId: ID! itemName: String! price:Int!): Merchant!
   }
 `;

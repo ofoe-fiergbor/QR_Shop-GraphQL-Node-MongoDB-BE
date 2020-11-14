@@ -15,11 +15,11 @@ const merchantSchema = new Schema({
       createdAt: String,
     },
   ],
-  likes: [{ username: String, createdAt: String }],
+  likes: [{ username: String, createdAt: String, email: String }],
   user: {
     type: Schema.Types.ObjectId,
     ref: "users",
   },
 });
 
-module.exports = model('Merchant', merchantSchema)
+module.exports = model("Merchant", merchantSchema);
