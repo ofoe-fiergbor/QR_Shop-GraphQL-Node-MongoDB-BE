@@ -6,11 +6,13 @@ const merchantSchema = new Schema({
   name: String,
   email: String,
   address: String,
-  products: [
+  items: [
     {
       username: String,
-      name: String,
+      email: String,
+      itemName: String,
       price: String,
+      createdAt: String,
     },
   ],
   likes: [{ username: String, createdAt: String }],

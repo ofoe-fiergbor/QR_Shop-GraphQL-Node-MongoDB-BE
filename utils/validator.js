@@ -66,4 +66,5 @@ const createMerchantValidator = (name, address) => {
 };
 
 
+
 module.exports = { registerValidator, loginValidator, createMerchantValidator };

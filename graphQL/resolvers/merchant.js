@@ -3,12 +3,12 @@ const { createMerchantValidator } = require("../../utils/validator");
 const checkAuth = require("../../utils/chechAuth");
 const { AuthenticationError } = require("apollo-server");
 
-const transformUser = (data) => {
-  return {
-    ...data._doc,
-    _id: data.id,
-  };
-};
+// const transformUser = (data) => {
+//   return {
+//     ...data._doc,
+//     _id: data.id,
+//   };
+// };
 
 module.exports = {
   Query: {

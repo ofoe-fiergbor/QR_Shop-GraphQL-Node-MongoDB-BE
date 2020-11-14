@@ -8,8 +8,17 @@ module.exports = gql`
     name:String!
     email: String!
     address: String!
+    items:[Item]!
   }
-  
+  type Item {
+    id:ID!
+    username: String!
+    email: String!
+    itemName:String!
+    price:Int!
+    createdAt:String!
+  }
+
   input RegisterInput {
     username: String!
     email: String!
@@ -32,8 +41,12 @@ module.exports = gql`
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(email:String! password:String!):User!
+
     createMerchant(name:String! address:String!): Merchant!
     deleteMerchant(merchantId:ID!): String!
     updateMerchant(name:String! address:String! merchantId:ID!): Merchant!
+
+    createItem(itemName: String! price: Int! merchantId:ID!):Merchant!
+    deleteItem(itemId:ID! merchantId:ID!):Merchant!
   }
 `;
