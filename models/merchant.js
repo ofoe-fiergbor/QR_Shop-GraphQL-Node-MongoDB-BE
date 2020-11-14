@@ -4,7 +4,7 @@ const merchantSchema = new Schema({
   username: String,
   createdAt: String,
   name: String,
-  contact: String,
+  email: String,
   address: String,
   products: [
     {

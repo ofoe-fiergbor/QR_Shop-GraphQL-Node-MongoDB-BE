@@ -49,4 +49,21 @@ const loginValidator = (email, password) => {
 };
 
 
-module.exports = { registerValidator, loginValidator };
+
+const createMerchantValidator = (name, address) => {
+  const errors = {};
+  if (name.trim() === "") {
+    errors.name = "Name must not be empty";
+  } 
+
+  if (address.trim() === "") {
+    errors.address = "Address must not be empty";
+  }
+  return {
+    errors,
+    valid: Object.keys(errors).length < 1,
+  };
+};
+
+
+module.exports = { registerValidator, loginValidator, createMerchantValidator };

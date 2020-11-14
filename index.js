@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 5000;
 const server = new ApolloServer({
   resolvers,
   typeDefs,
+  context:({req})=> ({req}),
+
 });
 
 mongoose
