@@ -8,6 +8,7 @@ const resolvers = require("./graphQL/resolvers");
 const PORT = process.env.PORT || 5000;
 
 const server = new ApolloServer({
+  cors:true,
   resolvers,
   typeDefs,
   context:({req})=> ({req}),
