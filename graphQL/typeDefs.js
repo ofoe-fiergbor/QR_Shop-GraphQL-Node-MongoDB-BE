@@ -7,6 +7,7 @@ module.exports = gql`
     createdAt: String!
     name: String!
     email: String!
+    uniqID: String!
     address: String!
     items: [Item]!
     likes: [Like]!
@@ -44,6 +45,7 @@ module.exports = gql`
   type Query {
     getMerchants: [Merchant]!
     getMerchant(merchantId: ID!): Merchant
+    getMerchantWithUID(UID: String!): Merchant
   }
   type Mutation {
     register(registerInput: RegisterInput): User!

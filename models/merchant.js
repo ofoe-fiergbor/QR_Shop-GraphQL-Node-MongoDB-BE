@@ -6,6 +6,7 @@ const merchantSchema = new Schema({
   name: String,
   email: String,
   address: String,
+  uniqID:String,
   items: [
     {
       username: String,

@@ -2,6 +2,7 @@ const Merchant = require("../../models/merchant");
 const { createMerchantValidator } = require("../../utils/validator");
 const checkAuth = require("../../utils/chechAuth");
 const { AuthenticationError } = require("apollo-server");
+const generateUniqueId = require("generate-unique-id");
 
 // const transformUser = (data) => {
 //   return {
@@ -12,6 +13,18 @@ const { AuthenticationError } = require("apollo-server");
 
 module.exports = {
   Query: {
+    getMerchantWithUID: async (_, { UID }) => {
+      try {
+        const merchant = Merchant.findOne({ uniqID: UID });
+        if (!merchant) {
+          throw new Error("Merchant not found!");
+        }
+        return merchant;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+
     getMerchants: async () => {
       try {
         const merchant = await Merchant.find();
@@ -25,7 +38,7 @@ module.exports = {
       try {
         const merchant = await Merchant.findById(merchantId);
         if (!merchant) {
-          throw new error("Merchant not found");
+          throw new Error("Merchant not found");
         }
         return merchant;
       } catch (error) {
@@ -46,6 +59,7 @@ module.exports = {
       const newMerchant = new Merchant({
         name,
         address,
+        uniqID: generateUniqueId({ length: 4, useLetters: false }),
         email: user.email,
         username: user.username,
         user: user.id,
@@ -82,9 +96,13 @@ module.exports = {
           userField = { name, address };
         }
 
-        return Merchant.findByIdAndUpdate(merchantId, {$set: userField}, {new:true})
+        return Merchant.findByIdAndUpdate(
+          merchantId,
+          { $set: userField },
+          { new: true }
+        );
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
       }
     },
 
