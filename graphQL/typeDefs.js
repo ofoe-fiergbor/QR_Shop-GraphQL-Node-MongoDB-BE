@@ -45,7 +45,6 @@ module.exports = gql`
   type Query {
     getMerchants: [Merchant]!
     getMerchant(merchantId: ID!): Merchant
-    getMerchantWithUID(UID: String!): Merchant
   }
   type Mutation {
     register(registerInput: RegisterInput): User!
@@ -58,6 +57,8 @@ module.exports = gql`
 
     createItem(itemName: String!, price: Int!, merchantId: ID!): Merchant!
     deleteItem(itemId: ID!, merchantId: ID!): Merchant!
+    getMerchantWithUID(UID: String!): Merchant
+
     # updateItem(itemId: ID!, merchantId: ID! itemName: String! price:Int!): Merchant!
   }
 `;

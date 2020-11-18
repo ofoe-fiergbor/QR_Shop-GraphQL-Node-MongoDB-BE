@@ -4,27 +4,8 @@ const checkAuth = require("../../utils/chechAuth");
 const { AuthenticationError } = require("apollo-server");
 const generateUniqueId = require("generate-unique-id");
 
-// const transformUser = (data) => {
-//   return {
-//     ...data._doc,
-//     _id: data.id,
-//   };
-// };
-
 module.exports = {
   Query: {
-    getMerchantWithUID: async (_, { UID }) => {
-      try {
-        const merchant = Merchant.findOne({ uniqID: UID });
-        if (!merchant) {
-          throw new Error("Merchant not found!");
-        }
-        return merchant;
-      } catch (error) {
-        throw new Error(error);
-      }
-    },
-
     getMerchants: async () => {
       try {
         const merchant = await Merchant.find();
@@ -130,6 +111,14 @@ module.exports = {
       } else {
         throw new UserInputError("Merchant not found");
       }
+    },
+
+    getMerchantWithUID: async (_, { UID }) => {
+      const merchant = Merchant.findOne({ uniqID: UID });
+      if (!merchant) {
+        throw new Error("Merchant not found!");
+      }
+      return merchant;
     },
   },
 };
