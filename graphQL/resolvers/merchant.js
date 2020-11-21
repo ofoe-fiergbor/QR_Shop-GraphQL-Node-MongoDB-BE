@@ -58,7 +58,7 @@ module.exports = {
         if (merchant.email === user.email) {
           await merchant.deleteOne();
           return "Post deleted successfully";
-        } else throw AuthenticationError("Access denied");
+        } else throw new AuthenticationError("Access denied");
       } catch (error) {
         throw new Error(error);
       }
