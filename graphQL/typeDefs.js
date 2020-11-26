@@ -45,6 +45,7 @@ module.exports = gql`
   type Query {
     getMerchants: [Merchant]!
     getMerchant(merchantId: ID!): Merchant
+    scanWithUID(UID: String!): Merchant
   }
   type Mutation {
     register(registerInput: RegisterInput): User!

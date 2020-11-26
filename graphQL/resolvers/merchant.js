@@ -26,7 +26,20 @@ module.exports = {
         throw new Error(error);
       }
     },
+
+    scanWithUID: async (_, { UID }) => {
+      const merchant = await Merchant.findOne({ uniqID: UID });
+      if (!merchant) {
+        throw new Error("Merchant not found!");
+      }
+      return merchant;
+    },
   },
+
+
+
+
+
 
   Mutation: {
     createMerchant: async (_, { name, address }, context) => {
@@ -114,7 +127,7 @@ module.exports = {
     },
 
     getMerchantWithUID: async (_, { UID }) => {
-      const merchant = Merchant.findOne({ uniqID: UID });
+      const merchant = await Merchant.findOne({ uniqID: UID });
       if (!merchant) {
         throw new Error("Merchant not found!");
       }
